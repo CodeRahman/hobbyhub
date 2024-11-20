@@ -1,7 +1,36 @@
-.ReadPosts {
-    display: grid;
-    grid-auto-flow: row;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 30px;
+.sort-options {
+    margin: 10px 0;
+    display: flex;
+    gap: 10px;
+    align-items: center;
 }
 
+.sort-options select {
+    padding: 5px;
+}
+
+/* Style for the Search Container */
+.search-container {
+    margin: 20px 0;
+    display: flex;
+    justify-content: center;
+}
+
+.search-input {
+    width: 80%;
+    padding: 10px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.search-input:focus {
+    outline: none;
+    border-color: #007BFF;
+}
+
+h2 {
+    text-align: center;
+    margin-top: 20px;
+}

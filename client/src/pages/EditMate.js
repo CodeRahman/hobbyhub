@@ -2,16 +2,35 @@ import React from 'react';
 import { useState } from 'react'
 import { useParams } from 'react-router-dom';
 import { supabase } from '../client'
+import { useEffect } from 'react';
 
 
-const EditMate = ({data}) => {
+const Editpost = ({data}) => {
 
     const {id} = useParams();
-    const [mate, setMate] = useState({id: null, mate_name: "", speed: "", color: "", strengths: "", weaknesses: ""});
+    const [post, setPost] = useState({id: null, title: "", content: "", upvotes: "", image_url: ""});
 
+    useEffect(() => {
+        const fetchPost = async () => {
+            const { data: fetchedPost, error } = await supabase
+                .from('Posts')
+                .select('*')
+                .eq('id', id)
+                .single();
+
+            if (error) {
+                console.error("Error fetching post:", error);
+            } else {
+                setPost(fetchedPost);
+            }
+        };
+
+        fetchPost();
+    }, [id]);
+    
     const handleChange = (event) => {
         const {name, value} = event.target;
-        setMate( (prev) => {
+        setPost( (prev) => {
             return {
                 ...prev,
                 [name]:value,
@@ -19,63 +38,36 @@ const EditMate = ({data}) => {
         })
     }
 
-    const updateMate = async (event) => {
+    const updatePost = async (event) => {
         event.preventDefault();
 
         await supabase
-          .from('Mates')
-          .update({mate_name: mate.mate_name, speed: mate.speed, color: mate.color, strengths: mate.strengths, weaknesses: mate.weaknesses})
+          .from('Posts')
+          .update({title: post.title, content: post.content,  image_url: post.image_url})
           .eq('id', id)
 
         window.location = "/";
     }
 
-    const deleteMate = async (event) => {
-        event.preventDefault();
-      
-        await supabase
-          .from('Mates')
-          .delete()
-          .eq('id', id); 
-      
-        window.location = "http://localhost:3000/";
-      }
-
     return (
         <div>
             <form>
-                <label for="mate_name">Crewmate</label> <br />
-                <input type="text" id="mate_name" name="mate_name" value={mate.mate_name} onChange={handleChange} /><br />
+                <label htmlFor="title">Post</label> <br />
+                <input type="text" id="title" name="title" value={post.title} onChange={handleChange} /><br />
                 <br/>
 
-                <label for="speed">speed</label><br />
-                <input type="text" id="speed" name="speed" value={mate.speed} onChange={handleChange} /><br />
+                <label htmlFor="content">content</label><br />
+                <input type="text" id="content" name="content" value={post.content} onChange={handleChange} /><br />
                 <br/>
 
-                <label for="color">Color</label><br />
-                <select id="color" name="color" onChange={handleChange} value={mate.color}> {/*CHANGE*/}
-                    <option value="">Select Color</option> {/*CHANGE*/}
-                    <option value="Red">Red</option> {/*CHANGE*/}
-                    <option value="Blue">Blue</option> {/*CHANGE*/}
-                    <option value="Green">Green</option> {/*CHANGE*/}
-                    <option value="Yellow">Yellow</option> {/*CHANGE*/}
-                    <option value="Purple">Purple</option> {/*CHANGE*/}
-                </select><br />
-                <br />
-
-                <label for="strengths">strengths</label><br />
-                <input type="text" id="strengths" name="strengths" value={mate.strengths} onChange={handleChange} /><br />
+                <label htmlFor="image_url">image_url</label><br />
+                <input type="text" id="image_url" name="image_url" value={post.image_url} onChange={handleChange} /><br />
                 <br/>
 
-                <label for="weaknesses">Weaknesses</label><br />
-                <input type="text" id="weaknesses" name="weaknesses" value={mate.weaknesses} onChange={handleChange} /><br />
-                <br/>
-
-                <input type="submit" value="Submit" onClick={updateMate}/>
-                <button className="deleteButton" onClick={deleteMate}>Delete</button>
+                <input type="submit" value="Submit" onClick={updatePost}/>
             </form>
         </div>
     )
 }
 
-export default EditMate
+export default Editpost

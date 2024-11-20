@@ -1,0 +1,44 @@
+/* PostCard container */
+.PostCard {
+    background-color: #fff; /* White background for the post */
+    padding: 15px; /* Padding inside the card */
+    margin: 15px 0; /* Space between cards */
+    border: 5px solid #f8f9fa; /* Light grey border */
+}
+/* Title of the post */
+.PostCard .title {
+    font-size: 1.5rem; /* Larger font size */
+    font-weight: 600; /* Bold font */
+    color: #333; /* Dark text color */
+    margin-bottom: 10px; /* Space below the title */
+    text-decoration: none; /* Remove underline from title link */
+    transition: color 0.3s ease;
+}
+
+.PostCard .title:hover {
+    color: #007BFF; /* Change color on hover */
+}
+
+/* Upvote count styling */
+.PostCard .upvotescount {
+    font-size: 1rem;
+    font-weight: 500;
+    color: #28a745; /* Green color for upvotes */
+    margin-bottom: 10px; /* Space below the upvotes count */
+}
+
+/* Timestamp (created time) styling */
+.PostCard .timestamp {
+    font-size: 0.875rem; /* Smaller text for the timestamp */
+    color: #888; /* Light grey color */
+    font-style: italic; /* Italicize the timestamp */
+}
+
+/* Link for more details (moredetails) */
+.PostCard .moredetails {
+    text-decoration: none; /* Remove underline */
+}
+
+.moredetails:hover{
+    cursor: pointer;
+}

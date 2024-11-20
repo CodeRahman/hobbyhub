@@ -1,12 +1,11 @@
 import './App.css';
 import React from 'react';
 import { useRoutes } from 'react-router-dom'
-import ReadMates from './pages/ReadMates'
-import CreateMate from './pages/CreateMate'
+import ReadPosts from './pages/ReadPosts'
+import CreatePost from './pages/CreatePost'
 import EditMate from './pages/EditMate'
-import MateDetail from './pages/MateDetail'
 import { Link } from 'react-router-dom'
-import Home from './pages/Home';
+import PostDetails from './pages/PostDetails';
 
 const App = () => {
   
@@ -18,7 +17,7 @@ const App = () => {
   let element = useRoutes([
     {
       path: "/",
-      element:<ReadMates data={mates}/>
+      element:<ReadPosts data={mates}/>
     },
     {
       path:"/edit/:id",
@@ -26,11 +25,11 @@ const App = () => {
     },
     {
       path:"/new",
-      element: <CreateMate />
+      element: <CreatePost />
     },
     {
-      path: "/mate/:id", //CHANGE// - Route for crewmate details
-      element: <MateDetail /> //CHANGE// - Render MateDetail component here
+      path: "/post/:id", //CHANGE// - Route for crewmate details
+      element: <PostDetails /> //CHANGE// - Render MateDetail component here
     },
   ]);
 
@@ -39,9 +38,7 @@ const App = () => {
     <div className="App">
 
       <div className="header">
-        <h1>CrewMates</h1>
-        <Link to="/"><button className="headerBtn"> View Crew 🔍  </button></Link>
-        <Link to="/new"><button className="headerBtn"> New CrewMate 🏆 </button></Link>
+        
       </div>
         {element}
     </div>
