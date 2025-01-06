@@ -138,9 +138,9 @@ const PostDetails = () => {
     
     return (
         <div>
-            <Link to="/"><button>Back to Home</button></Link>
-            <h2>{post.title}</h2>
-            <p><strong>Content:</strong> {post.content}</p>
+            <Link to="/"><button>Back</button></Link>
+            <p><strong>{post.title}</strong></p>
+            <p>{post.content}</p>
             {post.image_url && <img src={post.image_url} alt={post.title} style={{ maxWidth: '100%' }} />}
             <button onClick={handleUpvote}>Upvote</button>
             <p>Upvotes: {post.upvotes}</p>
